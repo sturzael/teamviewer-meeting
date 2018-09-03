@@ -14,7 +14,6 @@ jQuery(document).ready(function($) {
     },
     success: function(DataFromJson) {
       APIKey = DataFromJson.apikey;
-      console.log(APIKey);
       addHeaders();
     },
     error: function() {
@@ -23,27 +22,20 @@ jQuery(document).ready(function($) {
   });
 
   function addHeaders() {
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', APIKey);
-
-    var myInit = {
-      method: 'GET',
-      headers: myHeaders,
-      mode: 'cors',
-      cache: 'default'
-    };
-
-    var myRequest = new Request(APIKey, myInit);
-
-    myContentType = myRequest.headers.get('Authorization');
     start();
   };
 
   function start() {
     $.ajax({
+      xhrFields: {
+        withCredentials: true
+      },
+      headers: {
+        'Authorization': 'Bearer ' + APIKey
+      },
       url: 'https://webapi.teamviewer.com/api/v1/ping',
       type: 'GET',
-      contentType: 'application/json; charset=utf-8',
+      contentType: 'application/json;',
       dataType: 'json',
       success: function(DataFromJson) {
         console.log(DataFromJson);
