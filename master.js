@@ -23,18 +23,20 @@ jQuery(document).ready(function($) {
 
   function addHeaders() {
     start();
+
   };
 
   function start() {
+    const myHeaders = new Headers();
+
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', `Bearer ${APIKey}`);
+
     $.ajax({
-      xhrFields: {
-        withCredentials: true
-      },
-      headers: {
-        'Authorization': 'Bearer ' + APIKey
-      },
       url: 'https://webapi.teamviewer.com/api/v1/ping',
       type: 'GET',
+      mode: 'no-cors',
+      headers: myHeaders,
       contentType: 'application/json;',
       dataType: 'json',
       success: function(DataFromJson) {
