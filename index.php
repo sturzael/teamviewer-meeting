@@ -1,8 +1,8 @@
 <?php
 include('httpful.phar');
-$uri = "https://webapi.teamviewer.com/api/v1/ping";
+$uri = "https://webapi.teamviewer.com/api/v1/account";
 $response = \Httpful\Request::get($uri)
-    ->addHeader('Authorization', 'Basic ')
+    ->addHeader('Authorization', 'Bearer ')
     ->send();
 echo $response;
 
