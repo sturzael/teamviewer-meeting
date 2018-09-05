@@ -49,6 +49,4 @@ function createMeeting(){
       ->send();
 }
 
-
-
 ?>
