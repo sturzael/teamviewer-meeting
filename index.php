@@ -21,25 +21,19 @@ foreach ($decodedResponse['blizzMeetings'] as $item) {
   $meetingEndTime[] = $item['end'];
 }
 
-// if (in_array($startTime, $meetingTime)) {
-//   echo "in array";
-// }else {
-//   echo "not";
-// }
+(in_array($startTime, $meetingTime) && in_array($endTime, $meetingEndTime)) ? 'in array' : createMeeting();
 
-echo (in_array($startTime, $meetingTime) && in_array($endTime, $meetingEndTime)) ? "in array" : "not";
+function createMeeting(){
+  $uri = "https://webapi.teamviewer.com/api/v1/meetings/blizz";
+  $response = \Httpful\Request::post($uri)
+      ->addHeader('Authorization', "Bearer ".$GLOBALS['apikey'])
+      ->sendsType(\Httpful\Mime::FORM)
+      ->withoutStrictSsl()
+      ->expectsJson()
+      ->body("subject=".$GLOBALS['subject']."&start=".$GLOBALS['startTime']."&end=".$GLOBALS['endTime'])
+      ->send();
+}
 
-
-//create a meeting
-// $uri = "https://webapi.teamviewer.com/api/v1/meetings/blizz";
-// $response = \Httpful\Request::post($uri)
-//     ->addHeader('Authorization', "Bearer $apikey")
-//     ->sendsType(\Httpful\Mime::FORM)
-//     ->withoutStrictSsl()
-//     ->expectsJson()
-//     ->body("subject=$subject&start=$startTime&end=$endTime")
-//     ->send();
-// echo $response;
 
 
 ?>
