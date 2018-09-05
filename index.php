@@ -9,8 +9,7 @@ $startTime = "2018-09-08T14:00:00Z";
 $endTime = "2018-09-08T15:00:00Z";
 $subject = "subjectTest";
 
-
-//view meetings
+//fetch all meetings
 $uri = "https://webapi.teamviewer.com/api/v1/meetings/blizz";
 $response = \Httpful\Request::get($uri)
     ->addHeader('Authorization', "Bearer $apikey")
@@ -18,17 +17,18 @@ $response = \Httpful\Request::get($uri)
 $decodedResponse = json_decode($response, true);
 
 foreach ($decodedResponse['blizzMeetings'] as $item) {
-  $meetingTime = $item['start'];
-  $meetingEndTime = $item['end'];
-
-  if ($meetingTime == $startTime && $meetingEndTime == $endTime) {
-    echo "both the same";
-  }else {
-    echo "not the same";
-  }
+  $meetingTime[] = $item['start'];
+  $meetingEndTime[] = $item['end'];
 }
 
-// print_r($decodedResponse[0]['start']);
+// if (in_array($startTime, $meetingTime)) {
+//   echo "in array";
+// }else {
+//   echo "not";
+// }
+
+echo (in_array($startTime, $meetingTime)) ? "in array" : "not";
+
 
 //create a meeting
 // $uri = "https://webapi.teamviewer.com/api/v1/meetings/blizz";
@@ -40,8 +40,6 @@ foreach ($decodedResponse['blizzMeetings'] as $item) {
 //     ->body("subject=$subject&start=$startTime&end=$endTime")
 //     ->send();
 // echo $response;
-
-
 
 
 ?>
