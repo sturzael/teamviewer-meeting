@@ -5,6 +5,12 @@ $data = file_get_contents("data.json");
 $decodedData = json_decode($data, true);
 $apikey = $decodedData['apikey'];
 
+
+
+//fetch date times from wordpress and set times below
+
+
+
 $startTime = "2018-09-08T14:00:00Z";
 $endTime = "2018-09-08T15:00:00Z";
 $subject = "subjectTest";
