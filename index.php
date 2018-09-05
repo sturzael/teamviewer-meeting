@@ -27,7 +27,7 @@ foreach ($decodedResponse['blizzMeetings'] as $item) {
 //   echo "not";
 // }
 
-echo (in_array($startTime, $meetingTime)) ? "in array" : "not";
+echo (in_array($startTime, $meetingTime) && in_array($endTime, $meetingEndTime)) ? "in array" : "not";
 
 
 //create a meeting
